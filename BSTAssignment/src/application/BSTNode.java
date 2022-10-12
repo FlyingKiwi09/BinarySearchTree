@@ -2,6 +2,8 @@ package application;
 
 import java.util.Comparator;
 
+import javafx.collections.ObservableList;
+
 public class BSTNode<K,V> {
 
 	private K key;
@@ -30,6 +32,17 @@ public class BSTNode<K,V> {
 				this.right.add(newNode, comparator);
 			}
 		}
+	}
+	
+	public void output(ObservableList<String> list) {
+		
+		if (this.left != null) {
+			this.left.output(list);
+		}
+		if (this.right != null) {
+			this.right.output(list);
+		}
+		list.add(this.value.toString());
 	}
 
 	// getters and setters

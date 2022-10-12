@@ -15,6 +15,10 @@ public class Person {
 		this.IDCount++;
 		this.ID = this.IDCount;
 	}
+	
+	public String toString() {
+		return (this.ID + " " + this.firstName + " " + this.lastName + " " + this.age);
+	}
 
 	// getters and setters
 	public String getFirstName() {

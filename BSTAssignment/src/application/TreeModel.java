@@ -3,16 +3,27 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Test {
+public class TreeModel {
 
-	public static BinarySearchTree<Integer, Person> ageTree; 
-	public static ObservableList<String> testOutput = FXCollections.observableArrayList();
+	private static TreeModel instance;
+	private BinarySearchTree<Integer, Person> ageTree; 
+	private BinarySearchTree<String, Person> firstNameTree;
+	private BinarySearchTree<String, Person> lastNameTree;
+	private ObservableList<String> output;
 	
-	public Test() {
-		
+	// singleton pattern
+	private TreeModel() {
+		 output = FXCollections.observableArrayList();
 	}
 	
-	public static void ageTreeTest() {
+	public static TreeModel getInstance() {
+		if (instance == null) {
+			instance = new TreeModel();
+		}
+		return instance;
+	}
+	
+	public void ageTreeTest() {
 		PersonAgeComparator ageComparator = new PersonAgeComparator();
 		Person newPerson = new Person("Alina", "Hookway", 33);
 		ageTree = new BinarySearchTree<Integer, Person>(newPerson.getAge(), newPerson, ageComparator);
@@ -26,16 +37,42 @@ public class Test {
 		ageTree.add(p5.getAge(), p5);
 		Person p6 = new Person("Anne", "Bobby", 77);
 		ageTree.add(p6.getAge(), p6);
-		ageTree.output(testOutput);
+		ageTree.output(output);
 	}
 
 
-	public ObservableList<String> getTestOutput() {
-		return testOutput;
+
+// getters and setters
+	public BinarySearchTree<Integer, Person> getAgeTree() {
+		return ageTree;
 	}
 
-	public void setTestOutput(ObservableList<String> testOutput) {
-		this.testOutput = testOutput;
+	public void setAgeTree(BinarySearchTree<Integer, Person> ageTree) {
+		this.ageTree = ageTree;
+	}
+
+	public BinarySearchTree<String, Person> getFirstNameTree() {
+		return firstNameTree;
+	}
+
+	public void setFirstNameTree(BinarySearchTree<String, Person> firstNameTree) {
+		this.firstNameTree = firstNameTree;
+	}
+
+	public BinarySearchTree<String, Person> getLastNameTree() {
+		return lastNameTree;
+	}
+
+	public void setLastNameTree(BinarySearchTree<String, Person> lastNameTree) {
+		this.lastNameTree = lastNameTree;
+	}
+
+	public ObservableList<String> getOutput() {
+		return output;
+	}
+
+	public void setOutput(ObservableList<String> output) {
+		this.output = output;
 	}
 	
 	

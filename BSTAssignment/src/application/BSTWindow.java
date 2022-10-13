@@ -19,7 +19,23 @@ import javafx.scene.layout.VBox;
 
 
 public class BSTWindow extends Application {
-	
+	/* TODO refactor BST and BSTNode to be agnostic to how it displays the results
+	 * options:
+	 * 	- send through an arrayList of type BSTNode<V> to collect the relevant nodes.
+	 * 	- perhaps a queque is better than arrayList / more efficient and maintain order?
+	 * 	- send through a Processor object to process the nodes as it moves. 
+	 * 
+	 * 
+	 * TODO indent results as a tree when printing
+	 * 
+	 * TODO find people with different length names
+	 * 
+	 * A Grade:
+	 * TODO Allow name changes
+	 * TODO Monitor Skew
+	 * TODO Graphics
+	 * */
+
 	public static TreeModel trees;
 	
 	@Override

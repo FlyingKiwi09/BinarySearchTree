@@ -51,7 +51,7 @@ public class BSTWindow extends Application {
 	private VBox setUpControls() {
 		VBox controls = new VBox();
 		
-		// create data management buttons
+		// data management controls
 		Button generateDataButton = new Button("Generate Data");
 		Button saveDataButton = new Button("Save Data");
 		Button loadDataButton = new Button("Load Data");
@@ -104,6 +104,30 @@ public class BSTWindow extends Application {
 		searchButton.setOnMouseClicked(event -> {
 			trees.search(searchTypeChoiceBox.getValue(), searchTextField.getText());		
 		});
+		
+		// search by length controls
+		ChoiceBox<String> nameTypeChoiceBox = new ChoiceBox<String>();
+		ObservableList<String> nameTypeList = nameTypeChoiceBox.getItems();
+		nameTypeList.add("First Name");
+		nameTypeList.add("Last Name");
+		nameTypeList.add("Full Name");
+		
+		ChoiceBox<String> comparisonTypeChoiceBox = new ChoiceBox<String>();
+		ObservableList<String> comparisonTypeList = comparisonTypeChoiceBox.getItems();
+		comparisonTypeList.add("Greater Than");
+		comparisonTypeList.add("Less Than");
+		comparisonTypeList.add("Equal To");
+		
+		TextField lengthTextField = new TextField();
+		
+		Button lengthSearchButton = new Button ("Search");
+		
+		controls.getChildren().addAll(nameTypeChoiceBox, comparisonTypeChoiceBox, lengthTextField, lengthSearchButton);
+		
+		lengthSearchButton.setOnMouseClicked(event -> {
+			trees.lengthSearch(nameTypeChoiceBox.getValue(), comparisonTypeChoiceBox.getValue(), lengthTextField.getText());		
+		});
+		
 		
 		return controls;
 	}

@@ -92,6 +92,14 @@ public class TreeModel {
 			output.add(p.toString());
 		}
 	}
+	
+	// length search filters user input and calls appropriate lengthSearch on appropriate tree
+	public void lengthSearch(String nameType, String comparisonType, String length) {
+		output.clear();
+		ArrayList<Person> results = new ArrayList<Person>();
+		
+		
+	}
 
 // getters and setters
 	public BinarySearchTree<Person> getAgeTree() {

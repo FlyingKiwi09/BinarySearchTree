@@ -1,6 +1,8 @@
 package application;
 
+import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.Queue;
 
 import javafx.collections.ObservableList;
 
@@ -43,6 +45,31 @@ public class BinarySearchTree<V> {
 	
 	public void printIODF(ObservableList<String> list) {
 		this.root.printIODF(list);
+	}
+	
+	public void printPreDF(ObservableList<String> list) {
+		this.root.printPreDF(list);
+	}
+	
+	public void printPostDF(ObservableList<String> list) {
+		this.root.printPostDF(list);
+	}
+	
+	
+	public void printBF(ObservableList<String> list){
+		Queue<BSTNode<V>> todo = new ArrayDeque<BSTNode<V>>();
+		todo.offer(this.root);
+		while (!todo.isEmpty() ){
+			BSTNode<V> p = todo.poll();
+			list.add(p.getValue().toString());
+			if ( p.getLeft() != null ){
+			todo.offer(p.getLeft());
+			}
+			if ( p.getRight() != null ){
+			todo.offer(p.getRight());
+			}
+		}
+
 	}
 
 }

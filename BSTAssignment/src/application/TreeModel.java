@@ -30,11 +30,11 @@ public class TreeModel {
 			if (printType.equals("In-Order Depth First")) {
 				ageTree.printIODF(output);
 			} else if (printType.equals("Breath First")) {
-//				ageTree.printBF();
+				ageTree.printBF(output);
 			} else if (printType.equals("Pre-Order Depth First")){
-//				ageTree.printPreDF();
-			} else if (printType.equals("Pre-Order Depth First")){
-//				ageTree.printPostDF();
+				ageTree.printPreDF(output);
+			} else if (printType.equals("Post-Order Depth First")){
+				ageTree.printPostDF(output);
 			}
 		}
 		

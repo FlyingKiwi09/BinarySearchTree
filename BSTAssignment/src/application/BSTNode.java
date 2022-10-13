@@ -1,6 +1,8 @@
 package application;
 
+import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.Queue;
 
 import javafx.collections.ObservableList;
 
@@ -33,6 +35,7 @@ public class BSTNode<V> {
 	}
 	
 	
+	// in order depth first print that adds the print to the list
 	public void printIODF(ObservableList<String> list) {
 		
 		if (this.right != null) {
@@ -43,8 +46,46 @@ public class BSTNode<V> {
 		if (this.left != null) {
 			this.left.printIODF(list);
 		}
+	}
+	
+	// pre-order depth first print
+	public void printPreDF(ObservableList<String> list) {
+		
+		list.add(this.value.toString());
+		if (this.right != null) {
+			this.right.printPreDF(list);
+		}
+		if (this.left != null) {
+			this.left.printPreDF(list);
+		}
+	}
+	
+	// post-order depth first print
+	public void printPostDF(ObservableList<String> list) {
+		if (this.right != null) {
+			this.right.printPostDF(list);
+		}
+		if (this.left != null) {
+			this.left.printPostDF(list);
+		}
+		list.add(this.value.toString());
+	}
+	
+	
+	public void printBF(ObservableList<String> list) {
 		
 	}
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
 	
 
 	// getters and setters

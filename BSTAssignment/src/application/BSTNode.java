@@ -70,23 +70,6 @@ public class BSTNode<V> {
 		}
 		list.add(this.value.toString());
 	}
-	
-	
-	public void printBF(ObservableList<String> list) {
-		
-	}
-	
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 	// getters and setters
 

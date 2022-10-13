@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -23,9 +25,10 @@ public class TreeModel {
 		return instance;
 	}
 	
-
+	// print method filters user input and calls appropriate print method on approriate tree
 	public void print (String treeType, String printType) {
 		output.clear();
+		// print calls on ageTree
 		if (treeType.equals("Age")) {
 			if (printType.equals("In-Order Depth First")) {
 				ageTree.printIODF(output);
@@ -38,11 +41,49 @@ public class TreeModel {
 			}
 		}
 		
+		// print calls on firstNameTree
 		if (treeType.equals("First Name")) {
+			if (printType.equals("In-Order Depth First")) {
+				firstNameTree.printIODF(output);
+			} else if (printType.equals("Breath First")) {
+				firstNameTree.printBF(output);
+			} else if (printType.equals("Pre-Order Depth First")){
+				firstNameTree.printPreDF(output);
+			} else if (printType.equals("Post-Order Depth First")){
+				firstNameTree.printPostDF(output);
+			}
+		}
+		
+		// print calls on lastNameTree
+		if (treeType.equals("Last Name")) {
+			if (printType.equals("In-Order Depth First")) {
+				lastNameTree.printIODF(output);
+			} else if (printType.equals("Breath First")) {
+				lastNameTree.printBF(output);
+			} else if (printType.equals("Pre-Order Depth First")){
+				lastNameTree.printPreDF(output);
+			} else if (printType.equals("Post-Order Depth First")){
+				lastNameTree.printPostDF(output);
+			}
+		}
+	}
+	
+	// search method filters user input and calls search on appropriate tree
+	public void search(String searchType, String searchString) {
+		
+		ArrayList<Person> resultList = new ArrayList<Person>();
+		Person searchPerson = new Person(-1, "", "", -1);
+		
+		if (searchType.equals("Age")) {
+			searchPerson.setAge(Integer.parseInt(searchString));
+			ageTree.search(searchPerson, resultList);
+		}
+		
+		if (searchType.equals("First Name")) {
 			
 		}
 		
-		if (treeType.equals("Last Name")) {
+		if (searchType.equals("Last Name")) {
 			
 		}
 	}

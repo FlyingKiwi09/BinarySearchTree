@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -68,7 +69,7 @@ public class BSTWindow extends Application {
 			loadData();			
 		});
 		
-		// create search buttons
+		// print controls
 		ChoiceBox<String> treeChoiceBox = new ChoiceBox<String>();
 		ObservableList<String> treeList = treeChoiceBox.getItems();
 		treeList.add("Age");
@@ -87,6 +88,24 @@ public class BSTWindow extends Application {
 		
 		printTreeButton.setOnMouseClicked(event -> {
 			trees.print(treeChoiceBox.getValue(), printTypeChoiceBox.getValue());		
+		});
+		
+		
+		// search controls
+		ChoiceBox<String> searchTypeChoiceBox = new ChoiceBox<String>();
+		ObservableList<String> searchTypeeList = searchTypeChoiceBox.getItems();
+		searchTypeeList.add("Age");
+		searchTypeeList.add("First Name");
+		searchTypeeList.add("Last Name");
+		
+		TextField searchTextField = new TextField();
+		
+		Button searchButton = new Button("Search");
+		
+		controls.getChildren().addAll(treeChoiceBox, searchTextField, searchButton);
+		
+		searchButton.setOnMouseClicked(event -> {
+			trees.search(searchTypeChoiceBox.getValue(), searchTextField.getText());		
 		});
 		
 		return controls;

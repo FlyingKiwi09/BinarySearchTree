@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Queue;
 
@@ -42,20 +43,22 @@ public class BinarySearchTree<V> {
 	
 	
 	// print methods
-	
+	// in order depth first print that adds the print to the list
 	public void printIODF(ObservableList<String> list) {
 		this.root.printIODF(list);
 	}
 	
+	// pre-order depth first print
 	public void printPreDF(ObservableList<String> list) {
 		this.root.printPreDF(list);
 	}
 	
+	// post-order depth first print
 	public void printPostDF(ObservableList<String> list) {
 		this.root.printPostDF(list);
 	}
 	
-	
+	// breath first
 	public void printBF(ObservableList<String> list){
 		Queue<BSTNode<V>> todo = new ArrayDeque<BSTNode<V>>();
 		todo.offer(this.root);
@@ -70,6 +73,11 @@ public class BinarySearchTree<V> {
 			}
 		}
 
+	}
+	
+	// search methods
+	public void search(V target, ArrayList<V> results) {
+		
 	}
 
 }

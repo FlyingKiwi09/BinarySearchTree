@@ -84,7 +84,8 @@ public class TreeModel {
 		}
 		
 		if (searchType.equals("Last Name")) {
-			
+			LastNameResultCollector LNRC = new LastNameResultCollector();
+			results = LNRC.collect(searchString, lastNameTree.getRoot());
 		}
 		
 		for (Person p : results) {

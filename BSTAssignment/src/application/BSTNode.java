@@ -16,7 +16,7 @@ public class BSTNode<V> {
 	
 	// recursive add method passes the newNode and the comparator down until the newNode can be added
 	public void add(BSTNode<V> newNode, Comparator<V> comparator) {
-		if (comparator.compare(this.value, newNode.getValue()) < 1) {
+		if (comparator.compare(newNode.getValue(), this.value) < 1) {
 			if (this.left == null) {
 				this.left = newNode;
 			} else {

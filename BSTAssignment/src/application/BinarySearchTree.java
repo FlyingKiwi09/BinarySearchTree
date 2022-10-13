@@ -75,12 +75,21 @@ public class BinarySearchTree<V> {
 
 	}
 
+	// getters and setters
 	public BSTNode<V> getRoot() {
 		return root;
 	}
 
 	public void setRoot(BSTNode<V> root) {
 		this.root = root;
+	}
+
+	public Comparator<V> getComparator() {
+		return comparator;
+	}
+
+	public void setComparator(Comparator<V> comparator) {
+		this.comparator = comparator;
 	}
 	
 	

@@ -79,7 +79,8 @@ public class TreeModel {
 		}
 		
 		if (searchType.equals("First Name")) {
-			
+			FirstNameResultCollector FNRC = new FirstNameResultCollector();
+			results = FNRC.collect(searchString, firstNameTree.getRoot());
 		}
 		
 		if (searchType.equals("Last Name")) {

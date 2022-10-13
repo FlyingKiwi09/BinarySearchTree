@@ -1,11 +1,8 @@
 package application;
 	
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.application.Application;
@@ -102,7 +99,7 @@ public class BSTWindow extends Application {
 		
 		Button searchButton = new Button("Search");
 		
-		controls.getChildren().addAll(treeChoiceBox, searchTextField, searchButton);
+		controls.getChildren().addAll(searchTypeChoiceBox, searchTextField, searchButton);
 		
 		searchButton.setOnMouseClicked(event -> {
 			trees.search(searchTypeChoiceBox.getValue(), searchTextField.getText());		

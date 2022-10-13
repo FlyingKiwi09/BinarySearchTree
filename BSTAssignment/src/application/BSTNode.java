@@ -1,9 +1,6 @@
 package application;
 
-import java.util.ArrayDeque;
 import java.util.Comparator;
-import java.util.Queue;
-
 import javafx.collections.ObservableList;
 
 public class BSTNode<V> {

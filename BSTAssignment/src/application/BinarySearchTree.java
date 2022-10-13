@@ -74,10 +74,15 @@ public class BinarySearchTree<V> {
 		}
 
 	}
-	
-	// search methods
-	public void search(V target, ArrayList<V> results) {
-		
+
+	public BSTNode<V> getRoot() {
+		return root;
 	}
+
+	public void setRoot(BSTNode<V> root) {
+		this.root = root;
+	}
+	
+	
 
 }

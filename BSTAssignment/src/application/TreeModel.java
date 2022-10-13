@@ -70,13 +70,12 @@ public class TreeModel {
 	
 	// search method filters user input and calls search on appropriate tree
 	public void search(String searchType, String searchString) {
-		
-		ArrayList<Person> resultList = new ArrayList<Person>();
-		Person searchPerson = new Person(-1, "", "", -1);
+		output.clear();
+		ArrayList<Person> results = new ArrayList<Person>();
 		
 		if (searchType.equals("Age")) {
-			searchPerson.setAge(Integer.parseInt(searchString));
-			ageTree.search(searchPerson, resultList);
+			AgeResultCollector ARG = new AgeResultCollector();
+			results = ARG.collect(Integer.parseInt(searchString), ageTree.getRoot());
 		}
 		
 		if (searchType.equals("First Name")) {
@@ -85,6 +84,10 @@ public class TreeModel {
 		
 		if (searchType.equals("Last Name")) {
 			
+		}
+		
+		for (Person p : results) {
+			output.add(p.toString());
 		}
 	}
 

@@ -8,12 +8,21 @@ public class Person {
 	private int ID;
 	private static int IDCount = 0; 
 	
+	// to construct people without known IDs
 	public Person(String firstName, String lastName, int age) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.IDCount++;
 		this.ID = this.IDCount;
+	}
+	
+	// to construct people with known IDs
+	public Person(int ID, String firstName, String lastName, int age) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.ID = ID;
 	}
 	
 	public String toString() {

@@ -2,9 +2,9 @@ package application;
 
 import java.util.Comparator;
 
-public class PersonLastNameCoimparator implements Comparator<Person>{
+public class PersonLastNameComparator implements Comparator<Person>{
 
-	public PersonLastNameCoimparator() {
+	public PersonLastNameComparator() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -4,21 +4,19 @@ import java.util.Comparator;
 
 import javafx.collections.ObservableList;
 
-public class BSTNode<K,V> {
+public class BSTNode<V> {
 
-	private K key;
 	private V value;
-	private BSTNode<K, V> parent;
-	private BSTNode<K, V> left;
-	private BSTNode<K, V> right;
+	private BSTNode<V> parent;
+	private BSTNode<V> left;
+	private BSTNode<V> right;
 	
-	public BSTNode(K key, V value) {
-		this.key = key;
+	public BSTNode(V value) {
 		this.value = value;
 	}
 	
 	// recursive add method passes the newNode and the comparator down until the newNode can be added
-	public void add(BSTNode<K, V> newNode, Comparator<V> comparator) {
+	public void add(BSTNode<V> newNode, Comparator<V> comparator) {
 		if (comparator.compare(this.value, newNode.getValue()) < 1) {
 			if (this.left == null) {
 				this.left = newNode;
@@ -46,13 +44,6 @@ public class BSTNode<K,V> {
 	}
 
 	// getters and setters
-	public K getKey() {
-		return key;
-	}
-
-	public void setKey(K key) {
-		this.key = key;
-	}
 
 	public V getValue() {
 		return value;
@@ -62,27 +53,27 @@ public class BSTNode<K,V> {
 		this.value = value;
 	}
 
-	public BSTNode<K, V> getParent() {
+	public BSTNode<V> getParent() {
 		return parent;
 	}
 
-	public void setParent(BSTNode<K, V> parent) {
+	public void setParent(BSTNode<V> parent) {
 		this.parent = parent;
 	}
 
-	public BSTNode<K, V> getLeft() {
+	public BSTNode<V> getLeft() {
 		return left;
 	}
 
-	public void setLeft(BSTNode<K, V> left) {
+	public void setLeft(BSTNode<V> left) {
 		this.left = left;
 	}
 
-	public BSTNode<K, V> getRight() {
+	public BSTNode<V> getRight() {
 		return right;
 	}
 
-	public void setRight(BSTNode<K, V> right) {
+	public void setRight(BSTNode<V> right) {
 		this.right = right;
 	}
 	

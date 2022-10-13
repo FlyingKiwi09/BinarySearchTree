@@ -4,25 +4,38 @@ import java.util.Comparator;
 
 import javafx.collections.ObservableList;
 
-public class BinarySearchTree<K, V> {
+public class BinarySearchTree<V> {
 	
-	private BSTNode<K, V> root;
+	private BSTNode<V> root;
 	private Comparator<V> comparator; 
 
+	// constructs an empty binary search tree
+	public BinarySearchTree(Comparator<V> comparator){
+		this.comparator = comparator;
+	}
+	
 	// constructor the value that the comparator takes must be the same type as the value that is passed through to construct the new Node
-	public BinarySearchTree(K key, V value, Comparator<V> comparator) {
-		this.root = new BSTNode<K, V>(key, value);
+	public BinarySearchTree(V value, Comparator<V> comparator) {
+		this.root = new BSTNode<V>(value);
 		this.comparator = comparator;
 	}
 	
 	// adds a new node to the tree when a key & value is passed through
-	public void add(K key, V value) {
-		this.root.add(new BSTNode<K, V>(key, value), this.comparator);
+	public void add(V value) {
+		if (this.root == null) {
+			this.root = new BSTNode<V>(value); // if the root hasn't been set yet, constructs the root node
+		} else {
+			this.root.add(new BSTNode<V>(value), this.comparator);
+		}		
 	}
 	
 	// adds a new node to the tree when a node is passed through
-	public void add(BSTNode<K, V> newNode) {
-		this.root.add(newNode, this.comparator);
+	public void add(BSTNode<V> newNode) {
+		if (this.root == null) {
+			this.root = newNode; // if the root hasn't been set yet
+		} else {
+			this.root.add(newNode, this.comparator);
+		}
 	}
 	
 	// outputs all to the list

@@ -1,6 +1,16 @@
 package application;
 	
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import javafx.application.Application;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +27,7 @@ public class BSTWindow extends Application {
 	public void start(Stage primaryStage) {
 		
 		trees = TreeModel.getInstance();
+		
 		try {
 			BorderPane root = new BorderPane();
 			ListView<String> center = new ListView<String>();
@@ -52,20 +63,123 @@ public class BSTWindow extends Application {
 			generateData();			
 		});
 		
+		loadDataButton.setOnMouseClicked(event -> {
+			loadData();			
+		});
+		
 		return controls;
 	}
 	
 	private void generateData() {
-		//ask the user where they would like to save the data to
-		// generate data and save it to the file
-		// load the generated data into the system
+		
+		// ArrayLists of names to randomly choose from when generating randon names
+		ArrayList<String> firstNames = new ArrayList<String>();
+		ArrayList<String> lastNames = new ArrayList<String>();
+		
+		
+		// generate data, load to system and save to the file
+		ArrayList<Person> newPeople = new ArrayList<Person>();
+		
+		try (Scanner scanner = new Scanner(new File("Names.txt"))) {
+			while(scanner.hasNext()) {
+				// get names and add to names lists
+				firstNames.add(scanner.next());
+				lastNames.add(scanner.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		// create people with random combinations of firstName, lastName and age
+		for (int i = 0; i < 500; i++) {
+			String firstName = firstNames.get((int) Math.floor(Math.random()*(firstNames.size())+0));
+			String lastName = lastNames.get((int) Math.floor(Math.random()*(lastNames.size())+0));
+			int age = (int) Math.floor(Math.random()*(100)+0);
+			Person newPerson = new Person(firstName, lastName, age);
+			// add person to list for later writing to file
+			newPeople.add(newPerson);
+		}
+		
+		
+		// Create a new file to write to
+		Stage saveStage = new Stage();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Select File to Save New Data");
+		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+		
+		File newFile = fileChooser.showSaveDialog(saveStage);
+		
+		if (!newFile.getName().endsWith(".txt")){
+			newFile = new File(newFile.getAbsolutePath() + ".txt"); // adds .txt to the end of a new file name
+		}
+		
+		
+		// write to the new file
+        if (newFile != null) { 
+			try {
+				PrintStream ps = new PrintStream(newFile);
+				for (Person person : newPeople) {
+					ps.println(person.toString());
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }	
 	}
+	
 	
 	private void saveData() {
 		// take the data that is currently loaded into the system and save it to a file
+		//ask the user where they would like to save the data to
+		Stage saveStage = new Stage();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save Data");
+		File file = fileChooser.showSaveDialog(saveStage);
+        if (file != null) {
+            
+        }
 	}
 	
+	
 	private void loadData() {
-		// let the user choose a tile to load into the system
+		
+		// create comparators and BSTs 
+		PersonAgeComparator ageComparator = new PersonAgeComparator();
+		PersonFirstNameComparator firstNameComparator = new PersonFirstNameComparator();
+		PersonLastNameComparator lastNameComparator = new PersonLastNameComparator();
+		trees.setAgeTree(new BinarySearchTree<Person>(ageComparator));
+		trees.setFirstNameTree(new BinarySearchTree<Person>(firstNameComparator));
+		trees.setLastNameTree(new BinarySearchTree<Person>(lastNameComparator));
+		
+		// choose a file to load
+		Stage openStage = new Stage();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Select a File to Load");
+		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+		File loadFile = fileChooser.showOpenDialog(openStage);
+
+		// scan file and load data into BSTs
+		if (loadFile.getName().endsWith(".txt")) {
+			try (Scanner scanner = new Scanner(loadFile)) {
+				while(scanner.hasNext()) {
+					// get data and create Person
+					int ID = scanner.nextInt();
+					String firstName = scanner.next();
+					String lastName = scanner.next();
+					int age = scanner.nextInt();
+					
+					// load newPerson into BSTs
+					Person newPerson = new Person(ID, firstName, lastName, age);
+					System.out.println(newPerson.toString());
+					trees.getAgeTree().add(newPerson);
+					trees.getFirstNameTree().add(newPerson);
+					trees.getLastNameTree().add(newPerson);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

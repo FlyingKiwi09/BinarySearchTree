@@ -27,14 +27,14 @@ public class AgeResultCollector implements BSTCollector<Integer, Person> {
 		}
 	
 		// if less than the target - go right
-		if (node.getValue().getAge() < this.target) {
+		if (node.getValue().getAge() > this.target) {
 			if (node.getRight() != null) {
 				find(node.getRight());
 			}
 		}
 		
 		// if greater than the target - go left
-		if (node.getValue().getAge() > this.target) {
+		if (node.getValue().getAge() <= this.target) {
 			if (node.getLeft() != null) {
 				find(node.getLeft());
 			}

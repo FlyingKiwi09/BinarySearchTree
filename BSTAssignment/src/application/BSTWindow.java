@@ -8,12 +8,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -27,12 +28,12 @@ public class BSTWindow extends Application {
 	public void start(Stage primaryStage) {
 		
 		trees = TreeModel.getInstance();
+		fileLoader(new File("DefaultPeople.txt"));
 		
 		try {
 			BorderPane root = new BorderPane();
 			ListView<String> center = new ListView<String>();
 			center.setItems(trees.getOutput());
-			trees.ageTreeTest();
 			root.setCenter(center);
 			root.setLeft(setUpControls());
 			Scene scene = new Scene(root);
@@ -67,6 +68,27 @@ public class BSTWindow extends Application {
 			loadData();			
 		});
 		
+		// create search buttons
+		ChoiceBox<String> treeChoiceBox = new ChoiceBox<String>();
+		ObservableList<String> treeList = treeChoiceBox.getItems();
+		treeList.add("Age");
+		treeList.add("First Name");
+		treeList.add("Last Name");
+		
+		ChoiceBox<String> printTypeChoiceBox = new ChoiceBox<String>();
+		ObservableList<String> printTypeList = printTypeChoiceBox.getItems();
+		printTypeList.add("In-Order Depth First");
+		printTypeList.add("Breath First");
+		printTypeList.add("Pre-Order Depth First");
+		printTypeList.add("Post-Order Depth First");
+		
+		Button printTreeButton = new Button("Print Tree");
+		controls.getChildren().addAll(treeChoiceBox, printTypeChoiceBox, printTreeButton);
+		
+		printTreeButton.setOnMouseClicked(event -> {
+			trees.print(treeChoiceBox.getValue(), printTypeChoiceBox.getValue());		
+		});
+		
 		return controls;
 	}
 	
@@ -92,7 +114,7 @@ public class BSTWindow extends Application {
 		
 		
 		// create people with random combinations of firstName, lastName and age
-		for (int i = 0; i < 500; i++) {
+		for (int i = 0; i < 20; i++) {
 			String firstName = firstNames.get((int) Math.floor(Math.random()*(firstNames.size())+0));
 			String lastName = lastNames.get((int) Math.floor(Math.random()*(lastNames.size())+0));
 			int age = (int) Math.floor(Math.random()*(100)+0);
@@ -145,6 +167,19 @@ public class BSTWindow extends Application {
 	
 	private void loadData() {
 		
+		// choose a file to load
+		Stage openStage = new Stage();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Select a File to Load");
+		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+		File loadFile = fileChooser.showOpenDialog(openStage);
+
+		fileLoader(loadFile);
+		
+	}
+	
+	private void fileLoader(File loadFile) {
+		
 		// create comparators and BSTs 
 		PersonAgeComparator ageComparator = new PersonAgeComparator();
 		PersonFirstNameComparator firstNameComparator = new PersonFirstNameComparator();
@@ -153,13 +188,6 @@ public class BSTWindow extends Application {
 		trees.setFirstNameTree(new BinarySearchTree<Person>(firstNameComparator));
 		trees.setLastNameTree(new BinarySearchTree<Person>(lastNameComparator));
 		
-		// choose a file to load
-		Stage openStage = new Stage();
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select a File to Load");
-		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-		File loadFile = fileChooser.showOpenDialog(openStage);
-
 		// scan file and load data into BSTs
 		if (loadFile.getName().endsWith(".txt")) {
 			try (Scanner scanner = new Scanner(loadFile)) {

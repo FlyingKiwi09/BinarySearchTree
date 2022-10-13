@@ -23,24 +23,29 @@ public class TreeModel {
 		return instance;
 	}
 	
-	public void ageTreeTest() {
-		PersonAgeComparator ageComparator = new PersonAgeComparator();
-		Person newPerson = new Person("Alina", "Hookway", 33);
-		ageTree = new BinarySearchTree<Person>(newPerson, ageComparator);
-		Person p2 = new Person("Sue", "Bags", 88);
-		ageTree.add(p2);
-		Person p3 = new Person("Bob", "Bobby", 14);
-		ageTree.add(p3);
-		Person p4 = new Person("Sam", "Bobby", 14);
-		ageTree.add(p4);
-		Person p5 = new Person("Sam", "Bobby", 77);
-		ageTree.add(p5);
-		Person p6 = new Person("Anne", "Bobby", 77);
-		ageTree.add(p6);
-		ageTree.output(output);
+
+	public void print (String treeType, String printType) {
+		output.clear();
+		if (treeType.equals("Age")) {
+			if (printType.equals("In-Order Depth First")) {
+				ageTree.printIODF(output);
+			} else if (printType.equals("Breath First")) {
+//				ageTree.printBF();
+			} else if (printType.equals("Pre-Order Depth First")){
+//				ageTree.printPreDF();
+			} else if (printType.equals("Pre-Order Depth First")){
+//				ageTree.printPostDF();
+			}
+		}
+		
+		if (treeType.equals("First Name")) {
+			
+		}
+		
+		if (treeType.equals("Last Name")) {
+			
+		}
 	}
-
-
 
 // getters and setters
 	public BinarySearchTree<Person> getAgeTree() {

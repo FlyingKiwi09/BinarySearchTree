@@ -32,16 +32,20 @@ public class BSTNode<V> {
 		}
 	}
 	
-	public void output(ObservableList<String> list) {
+	
+	public void printIODF(ObservableList<String> list) {
 		
-		if (this.left != null) {
-			this.left.output(list);
-		}
 		if (this.right != null) {
-			this.right.output(list);
+			this.right.printIODF(list);
 		}
 		list.add(this.value.toString());
+		
+		if (this.left != null) {
+			this.left.printIODF(list);
+		}
+		
 	}
+	
 
 	// getters and setters
 

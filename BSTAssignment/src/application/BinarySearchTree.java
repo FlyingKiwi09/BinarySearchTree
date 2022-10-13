@@ -38,10 +38,11 @@ public class BinarySearchTree<V> {
 		}
 	}
 	
-	// outputs all to the list
-	public void output(ObservableList<String> list) {
-		this.root.output(list);
-	}
 	
+	// print methods
+	
+	public void printIODF(ObservableList<String> list) {
+		this.root.printIODF(list);
+	}
 
 }

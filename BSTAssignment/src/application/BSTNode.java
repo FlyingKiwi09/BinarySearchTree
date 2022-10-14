@@ -50,22 +50,22 @@ public class BSTNode<V> {
 		
 		list.add(label + this.value.toString());
 		if (this.right != null) {
-			this.right.printPreDF(list, "    |    " + label);
+			this.right.printPreDF(list, "  |  " + label);
 		}
 		if (this.left != null) {
-			this.left.printPreDF(list, "    |    " + label);
+			this.left.printPreDF(list, "  |  " + label);
 		}
 	}
 	
 	// post-order depth first print
-	public void printPostDF(ObservableList<String> list) {
+	public void printPostDF(ObservableList<String> list, String label) {
 		if (this.right != null) {
-			this.right.printPostDF(list);
+			this.right.printPostDF(list, "   |   " + label);
 		}
 		if (this.left != null) {
-			this.left.printPostDF(list);
+			this.left.printPostDF(list, "   |   " + label);
 		}
-		list.add(this.value.toString());
+		list.add(label + this.value.toString());
 	}
 
 	// getters and setters

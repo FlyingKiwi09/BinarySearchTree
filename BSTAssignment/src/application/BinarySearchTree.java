@@ -55,7 +55,7 @@ public class BinarySearchTree<V> {
 	
 	// post-order depth first print
 	public void printPostDF(ObservableList<String> list) {
-		this.root.printPostDF(list);
+		this.root.printPostDF(list, "");
 	}
 	
 	// breath first

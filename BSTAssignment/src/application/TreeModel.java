@@ -96,9 +96,23 @@ public class TreeModel {
 	// length search filters user input and calls appropriate lengthSearch on appropriate tree
 	public void lengthSearch(String nameType, String comparisonType, String length) {
 		output.clear();
+		
+		ComparisonType CT;
+		if (comparisonType.equals("Greater Than")) {
+			CT = ComparisonType.GreaterThan;
+		} else if (comparisonType.equals("Less Than")) {
+			CT = ComparisonType.LessThan;
+		} else {
+			CT = ComparisonType.EqualTo;
+		}
+		
 		ArrayList<Person> results = new ArrayList<Person>();
+		NameSearchResultCollector NSRC = new NameSearchResultCollector(nameType, CT);
+		results = NSRC.collect(Integer.parseInt(length), firstNameTree.getRoot());
 		
-		
+		for (Person p : results) {
+			output.add(p.toString());
+		}
 	}
 
 // getters and setters

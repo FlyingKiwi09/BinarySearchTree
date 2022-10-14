@@ -46,14 +46,14 @@ public class BSTNode<V> {
 	}
 	
 	// pre-order depth first print
-	public void printPreDF(ObservableList<String> list) {
+	public void printPreDF(ObservableList<String> list, String label) {
 		
-		list.add(this.value.toString());
+		list.add(label + this.value.toString());
 		if (this.right != null) {
-			this.right.printPreDF(list);
+			this.right.printPreDF(list, "    |    " + label);
 		}
 		if (this.left != null) {
-			this.left.printPreDF(list);
+			this.left.printPreDF(list, "    |    " + label);
 		}
 	}
 	

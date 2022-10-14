@@ -17,7 +17,7 @@ public class BinarySearchTree<V> {
 		this.comparator = comparator;
 	}
 	
-	// constructor the value that the comparator takes must be the same type as the value that is passed through to construct the new Node
+	// constructor - the value that the comparator takes must be the same type as the value that is passed through to construct the new Node
 	public BinarySearchTree(V value, Comparator<V> comparator) {
 		this.root = new BSTNode<V>(value);
 		this.comparator = comparator;
@@ -50,7 +50,7 @@ public class BinarySearchTree<V> {
 	
 	// pre-order depth first print
 	public void printPreDF(ObservableList<String> list) {
-		this.root.printPreDF(list);
+		this.root.printPreDF(list, "");
 	}
 	
 	// post-order depth first print

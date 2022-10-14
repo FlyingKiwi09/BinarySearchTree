@@ -74,6 +74,19 @@ public class BinarySearchTree<V> {
 		}
 
 	}
+	
+	// delete a node
+	public void delete(V toDelete) {
+		if (this.root.equals(toDelete)) {
+			// call delete on this node
+		} 
+		
+		
+		
+		
+		root.delete(toDelete, comparator);
+		
+	}
 
 	// getters and setters
 	public BSTNode<V> getRoot() {

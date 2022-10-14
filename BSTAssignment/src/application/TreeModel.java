@@ -11,6 +11,7 @@ public class TreeModel {
 	private BinarySearchTree<Person> ageTree; 
 	private BinarySearchTree<Person> firstNameTree;
 	private BinarySearchTree<Person> lastNameTree;
+	private BinarySearchTree<Person> idTree;
 	private ObservableList<String> output;
 	
 	// singleton pattern
@@ -118,6 +119,24 @@ public class TreeModel {
 	// delete node by ID
 	public void deleteNode(String nodeID) {
 		
+		int ID = Integer.parseInt(nodeID);
+		IDResultCollector IDRC = new IDResultCollector();
+		
+		ArrayList<Person> person = IDRC.collect(ID, idTree.getRoot());
+		
+		Person toDelete = null;
+		
+		if (!person.isEmpty()) {
+			toDelete = person.get(0);
+		}
+		
+		if (toDelete != null) {
+			ageTree.delete(toDelete);
+			firstNameTree.delete(toDelete);
+			lastNameTree.delete(toDelete);
+			idTree.delete(toDelete);
+		}
+
 	}
 	
 
@@ -154,6 +173,15 @@ public class TreeModel {
 	public void setOutput(ObservableList<String> output) {
 		this.output = output;
 	}
+
+	public BinarySearchTree<Person> getIdTree() {
+		return idTree;
+	}
+
+	public void setIdTree(BinarySearchTree<Person> idTree) {
+		this.idTree = idTree;
+	}
+	
 	
 	
 

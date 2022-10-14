@@ -251,9 +251,11 @@ public class BSTWindow extends Application {
 		PersonAgeComparator ageComparator = new PersonAgeComparator();
 		PersonFirstNameComparator firstNameComparator = new PersonFirstNameComparator();
 		PersonLastNameComparator lastNameComparator = new PersonLastNameComparator();
+		PersonIDComparator idComparator = new PersonIDComparator();
 		trees.setAgeTree(new BinarySearchTree<Person>(ageComparator));
 		trees.setFirstNameTree(new BinarySearchTree<Person>(firstNameComparator));
 		trees.setLastNameTree(new BinarySearchTree<Person>(lastNameComparator));
+		trees.setIdTree(new BinarySearchTree<Person>(idComparator));
 		
 		// scan file and load data into BSTs
 		if (loadFile.getName().endsWith(".txt")) {

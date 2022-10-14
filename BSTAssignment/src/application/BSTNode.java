@@ -21,12 +21,14 @@ public class BSTNode<V> {
 				this.left = newNode;
 			} else {
 				this.left.add(newNode, comparator);
+				this.left.setParent(this);
 			}
 		} else {
 			if (this.right == null) {
 				this.right = newNode;
 			} else {
 				this.right.add(newNode, comparator);
+				this.right.setParent(this);
 			}
 		}
 	}
@@ -66,6 +68,70 @@ public class BSTNode<V> {
 			this.left.printPostDF(list, "   |   " + label);
 		}
 		list.add(label + this.value.toString());
+	}
+	
+	// delete
+	public BSTNode<V> delete(V toDelete, Comparator<V> comparator) {
+		if (this.value.equals(toDelete)) { // if this is the node to delete
+			
+			if (this.left == null && this.right == null) { // if this is a leaf
+				this.parent.deleteLeafChild(this.value); // delete me
+			} else if (this.left == null) { // if this has no left children
+				this.parent.deleteChildRightOnly(this.value);// delete me and replace me with my right child
+			} else if (this.right == null) { // if this has no right children
+				this.parent.deleteChildLeftOnly(this.value);// delete me and replace me with my left child
+			} else { // if this has two children
+				// find minimum in right-sub tree
+				// copy the value the targeted node
+				// delete duplicate from right-subtree
+				
+			}
+			
+			return 
+			
+			
+		} else { // search the tree for the node to delete
+			int compareValue = comparator.compare(toDelete, this.value);
+			if (compareValue < 1 && this.left != null) {
+				this.left.delete(toDelete, comparator);
+			}
+			if (compareValue > 0 && this.right != null ) {
+				this.right.delete(toDelete, comparator);
+			}
+		}
+		
+		
+	}
+	
+	private void deleteLeafChild(V toDelete) {
+		if (this.left.equals(toDelete)) {
+			this.left = null;
+		}
+		
+		if (this.right.equals(toDelete)) {
+			this.right = null;
+		}
+	}
+	
+	
+	private void deleteChildRightOnly(V toDelete) {
+		if (this.left.equals(toDelete)) {
+			this.left = this.left.right;
+		}
+		
+		if (this.right.equals(toDelete)) {
+			this.right = this.right.right;
+		}
+	}
+	
+	private void deleteChildLeftOnly(V toDelete) {
+		if (this.left.equals(toDelete)) {
+			this.left = this.left.left;
+		}
+		
+		if (this.right.equals(toDelete)) {
+			this.right = this.right.left;
+		}
 	}
 
 	// getters and setters

@@ -114,6 +114,13 @@ public class TreeModel {
 			output.add(p.toString());
 		}
 	}
+	
+	// delete node by ID
+	public void deleteNode(String nodeID) {
+		
+	}
+	
+
 
 // getters and setters
 	public BinarySearchTree<Person> getAgeTree() {

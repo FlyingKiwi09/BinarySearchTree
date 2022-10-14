@@ -20,12 +20,19 @@ import javafx.scene.layout.VBox;
 
 public class BSTWindow extends Application {
 	/* TODO add verification and error messages for user inputs
-	 * TODO indent results as a tree when printing
+	 * Done indent results as a tree when printing
+	 * TODO format breath first results when printing
 	 * 
 	 * Done - find people with different length names
 	 * 
 	 * A Grade:
 	 * TODO Allow name changes
+	 * 	- have options for changing first and last name
+	 * 	- delete a node from all trees but hold onto it to update it's name
+	 * 	- update it's name
+	 * 	- add it back to the tree
+	 * 
+	 *	
 	 * TODO Monitor Skew
 	 * TODO Graphics
 	 * */
@@ -138,6 +145,16 @@ public class BSTWindow extends Application {
 			trees.lengthSearch(nameTypeChoiceBox.getValue(), comparisonTypeChoiceBox.getValue(), lengthTextField.getText());		
 		});
 		
+		
+		// delete node by ID controls
+		TextField nodeIDTextField = new TextField();
+		Button deleteNodeButton = new Button("Delete");
+		
+		controls.getChildren().addAll(nodeIDTextField, deleteNodeButton);
+		
+		deleteNodeButton.setOnMouseClicked(event -> {
+			trees.deleteNode(nodeIDTextField.getText());	
+		});
 		
 		return controls;
 	}

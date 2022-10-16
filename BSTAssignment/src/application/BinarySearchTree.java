@@ -75,18 +75,73 @@ public class BinarySearchTree<V> {
 
 	}
 	
-	// delete a node
+	
 	public void delete(V toDelete) {
-		if (this.root.equals(toDelete)) {
-			// call delete on this node
-		} 
-		
-		
-		
-		
-		root.delete(toDelete, comparator);
-		
+		this.root.delete(root, toDelete, comparator);
 	}
+	
+	
+	
+	
+//	// my attempt at delete a node
+//	public void delete(V toDelete) {
+//		if (this.root.equals(toDelete)) {
+//			// call delete on this node
+//		} 
+//		
+//		
+//		
+//		
+//		root.delete(toDelete, comparator);
+//		
+//	}
+	
+	//https://www.youtube.com/watch?v=gcULXE7ViZw&t=791s
+	
+//	// delete (video version)
+//	public BSTNode<V> delete(BSTNode<V> root, V toDelete){
+//		if (root == null) return root;
+//		else if (comparator.compare(toDelete, root.getValue()) < 0) {
+//			root = delete(root.getLeft(), toDelete);
+//		} else if (comparator.compare(toDelete, root.getValue()) > 0) {
+//			root = delete(root.getRight(), toDelete);
+//		} else { // found the node to delete
+//			
+//			// no child
+//			if (root.getLeft() == null && root.getRight() == null) {
+//				root = null;
+//				
+//			} else if (root.getLeft() == null) {
+//				BSTNode<V> temp = root;
+//				root = root.getRight();
+//				temp = null;
+//				
+//			} else if (root.getRight() == null) {
+//				BSTNode<V> temp = root;
+//				root = root.getLeft();
+//				temp = null;
+//				
+//			} else { // 2 children
+//				BSTNode<V> temp = findMin(root.getRight());
+//				root.setValue(temp.getValue());
+//				root.setRight(delete(root.getRight(), temp.getValue()));
+//			}
+//		}
+//		
+//		return root;
+//		
+//	}
+//	
+//
+//	
+//	private BSTNode<V> findMin(BSTNode<V> node) {
+//		if (node.getLeft() == null) {
+//			return node;
+//		} else {
+//			return findMin(node.getLeft());
+//		}
+//	}
+	
 
 	// getters and setters
 	public BSTNode<V> getRoot() {

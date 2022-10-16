@@ -132,7 +132,7 @@ public class TreeModel {
 		
 		if (toDelete != null) {
 			ageTree.delete(toDelete);
-			firstNameTree.delete(toDelete);
+			firstNameTree.delete( toDelete);
 			lastNameTree.delete(toDelete);
 			idTree.delete(toDelete);
 		}

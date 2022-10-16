@@ -273,6 +273,7 @@ public class BSTWindow extends Application {
 					trees.getAgeTree().add(newPerson);
 					trees.getFirstNameTree().add(newPerson);
 					trees.getLastNameTree().add(newPerson);
+					trees.getIdTree().add(newPerson);
 				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();

@@ -50,7 +50,7 @@ public class BSTNode<V> {
 	// pre-order depth first print
 	public void printPreDF(ObservableList<String> list, String label) {
 		
-		list.add(label + this.value.toString());
+		list.add(label + this.value.toString() );
 		if (this.right != null) {
 			this.right.printPreDF(list, "  |  " + label);
 		}
@@ -70,69 +70,124 @@ public class BSTNode<V> {
 		list.add(label + this.value.toString());
 	}
 	
-	// delete
-	public BSTNode<V> delete(V toDelete, Comparator<V> comparator) {
-		if (this.value.equals(toDelete)) { // if this is the node to delete
-			
-			if (this.left == null && this.right == null) { // if this is a leaf
-				this.parent.deleteLeafChild(this.value); // delete me
-			} else if (this.left == null) { // if this has no left children
-				this.parent.deleteChildRightOnly(this.value);// delete me and replace me with my right child
-			} else if (this.right == null) { // if this has no right children
-				this.parent.deleteChildLeftOnly(this.value);// delete me and replace me with my left child
-			} else { // if this has two children
-				// find minimum in right-sub tree
-				// copy the value the targeted node
-				// delete duplicate from right-subtree
+	// delete node
+	// from video  https://www.youtube.com/watch?v=JsgqnTLjfps
+	public BSTNode<V> delete(BSTNode<V> node, V toDelete, Comparator<V> comparator){
+		if (node == null) {
+			return null;
+		} 
+		
+		int compareValue = comparator.compare(toDelete, node.value);
+		if (compareValue < 0 ) {
+			node.left = delete(node.left, toDelete, comparator);
+		} else if (compareValue > 0) {
+			node.right = delete(node.right, toDelete, comparator);
+		} else {
+			if (node.left == null || node.right == null) {
+				BSTNode<V> temp = null;
+				temp = node.left == null ? node.right : node.left;
 				
-			}
-			
-			return 
-			
-			
-		} else { // search the tree for the node to delete
-			int compareValue = comparator.compare(toDelete, this.value);
-			if (compareValue < 1 && this.left != null) {
-				this.left.delete(toDelete, comparator);
-			}
-			if (compareValue > 0 && this.right != null ) {
-				this.right.delete(toDelete, comparator);
+				if (temp == null) {
+					return null;
+				} else {
+					return temp;
+				}
+				
+			} else {
+				BSTNode<V> successor = getSuccessor(node);
+				node.value = successor.value;
+				delete(node.right, successor.value, comparator);
 			}
 		}
-		
+		return node;
 		
 	}
 	
-	private void deleteLeafChild(V toDelete) {
-		if (this.left.equals(toDelete)) {
-			this.left = null;
+	 
+	public BSTNode<V> getSuccessor (BSTNode<V> node){
+		if (node == null) {
+			return null;
 		}
 		
-		if (this.right.equals(toDelete)) {
-			this.right = null;
-		}
-	}
-	
-	
-	private void deleteChildRightOnly(V toDelete) {
-		if (this.left.equals(toDelete)) {
-			this.left = this.left.right;
+		BSTNode<V> temp = node.right;
+		
+		while (temp.left != null) {
+			temp = temp.left;
 		}
 		
-		if (this.right.equals(toDelete)) {
-			this.right = this.right.right;
-		}
+		return temp;
 	}
 	
-	private void deleteChildLeftOnly(V toDelete) {
-		if (this.left.equals(toDelete)) {
-			this.left = this.left.left;
-		}
-		
-		if (this.right.equals(toDelete)) {
-			this.right = this.right.left;
-		}
-	}
+//	// My attempt at delete node 
+//	public BSTNode<V> delete(V toDelete, Comparator<V> comparator) {
+//		if (this.value.equals(toDelete)) { // if this is the node to delete
+//			
+//			if (this.left == null && this.right == null) { // if this is a leaf
+//				this.parent.deleteLeafChild(this.value); // delete me
+//			} else if (this.left == null) { // if this has no left children
+//				this.parent.deleteChildRightOnly(this.value);// delete me and replace me with my right child
+//			} else if (this.right == null) { // if this has no right children
+//				this.parent.deleteChildLeftOnly(this.value);// delete me and replace me with my left child
+//			} else { // if this has two children
+//				// find minimum in right-sub tree
+//				// copy the value the targeted node
+//				// delete duplicate from right-subtree
+//				this.value = findMinOnRight(this.right);
+//			
+//			return 
+//			
+//			
+//		} else { // search the tree for the node to delete
+//			int compareValue = comparator.compare(toDelete, this.value);
+//			if (compareValue < 1 && this.left != null) {
+//				this.left.delete(toDelete, comparator);
+//			}
+//			if (compareValue > 0 && this.right != null ) {
+//				this.right.delete(toDelete, comparator);
+//			}
+//		}
+//		
+//		
+//	}
+//	
+//	private void deleteLeafChild(V toDelete) {
+//		if (this.left.equals(toDelete)) {
+//			this.left = null;
+//		}
+//		
+//		if (this.right.equals(toDelete)) {
+//			this.right = null;
+//		}
+//	}
+//	
+//	
+//	private void deleteChildRightOnly(V toDelete) {
+//		if (this.left.equals(toDelete)) {
+//			this.left = this.left.right;
+//		}
+//		
+//		if (this.right.equals(toDelete)) {
+//			this.right = this.right.right;
+//		}
+//	}
+//	
+//	private void deleteChildLeftOnly(V toDelete) {
+//		if (this.left.equals(toDelete)) {
+//			this.left = this.left.left;
+//		}
+//		
+//		if (this.right.equals(toDelete)) {
+//			this.right = this.right.left;
+//		}
+//	}
+//	
+//	private V findMinOnRight(BSTNode<V> node) {
+//		if (node.getLeft() == null) {
+//			return node.getValue();
+//		} else {
+//			return findMinOnRight(this.getLeft());
+//		}
+//	}
 
 	// getters and setters
 

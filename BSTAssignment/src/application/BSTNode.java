@@ -9,6 +9,7 @@ public class BSTNode<V> {
 	private BSTNode<V> parent;
 	private BSTNode<V> left;
 	private BSTNode<V> right;
+	private int level;
 	
 	public BSTNode(V value) {
 		this.value = value;

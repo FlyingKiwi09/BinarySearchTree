@@ -1,1 +1,37 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+.controls > .button {
+	-fx-padding: 5px;
+	-fx-border-insets: 5px;
+	-fx-background-insets: 5px;
+	-fx-border-color: lightgrey ;
+    -fx-border-width: 1, 0, 1, 0 ;
+}
+
+.controls > .text-field {
+	-fx-padding: 5px;
+	-fx-border-insets: 5px;
+	-fx-background-insets: 5px;
+	-fx-border-color: lightgrey ;
+    -fx-border-width: 1, 0, 1, 0 ;
+}
+
+.controls > .choice-box {
+
+	-fx-background-insets: 5px;
+	-fx-border-color: lightgrey ;
+    -fx-border-width: 1, 0, 1, 0 ;
+}
+
+.label {
+	-fx-label-padding: 5px;
+}
+
+
+.heading {
+	-fx-font-size: 15px;
+	-fx-font-weight: 800;
+}
+
+
